@@ -1,0 +1,115 @@
+#include "iostream"
+
+using namespace std;
+
+struct SomeItems
+{
+    int ID;
+    int AmountOfItems;
+    SomeItems *pNext;
+};
+
+//Добавление в начало(сверху)
+void AddAfter(SomeItems *&head, int id, int AmountOfItems){
+    SomeItems *newItem = new SomeItems;
+    newItem -> ID = id;
+    newItem -> AmountOfItems = AmountOfItems;
+    SomeItems *tmp = head; 
+
+    newItem -> pNext = head;
+    head = newItem;
+}
+//Добавление в конец(снизу)
+void AddBefore(SomeItems *&head, int id, int AmountOfItems){
+    SomeItems *newItem = new SomeItems;
+    newItem -> ID = id; 
+    newItem -> AmountOfItems = AmountOfItems;
+
+    SomeItems *tmp = head;
+
+    while(tmp -> pNext != NULL){
+        tmp = tmp -> pNext;
+    }
+
+    newItem -> pNext = tmp -> pNext;
+    tmp -> pNext = newItem;
+}
+//Удаление самого верхнего элемента
+void DelFirstFromList(SomeItems *&head){
+    SomeItems *DelTmp = head;
+    
+    if(DelTmp == head -> pNext == NULL){
+        head = DelTmp -> pNext;
+        delete(DelTmp);
+        return;
+    }
+}
+//Удаление самого нижнего элемента
+void DelLastFromList(SomeItems *&head){
+    if(!head){
+        return;
+    }
+
+    if(!head -> pNext){
+        delete head;
+        head = NULL;
+        return;
+    }
+
+    SomeItems *DelTmp = head;  
+    while (DelTmp->pNext->pNext)
+    {
+        DelTmp = DelTmp -> pNext;
+    }
+    delete DelTmp -> pNext;
+    DelTmp -> pNext = NULL;
+      
+
+}
+
+
+    
+
+//Печать списка
+void PrintList(SomeItems *head){
+    if (head == NULL){
+        cout << "There is no items" << endl;
+    }
+    SomeItems *tmp = head;
+    while (tmp != NULL)
+    {
+        cout << "Tovar id: " << tmp -> ID << '\t' << "Amount of items: " << tmp -> AmountOfItems << endl;
+        tmp = tmp -> pNext;
+    }
+    
+}
+
+int main(){
+    SomeItems *head = NULL;
+
+    int id1 = 1;
+    int AmountOfItems1 = 5;
+
+    int id2 = 2;
+    int AmountOfItems2 = 10;
+
+    int id3 = 3;
+    int AmountOfItems3 = 15;
+
+    int id4 = 4;
+    int AmountOfItems4 = 2;
+
+    PrintList(head);
+    cout << "------------" << endl;
+    AddAfter(head, id1, AmountOfItems1);
+    AddAfter(head, id2, AmountOfItems2);
+    AddBefore(head, id3, AmountOfItems3);
+    AddBefore(head, id4, AmountOfItems4);
+    PrintList(head);
+    cout << "------------" << endl;
+    DelFirstFromList(head);
+    DelLastFromList(head);
+    PrintList(head);
+
+    return 0;
+}
