@@ -10,7 +10,7 @@ struct SomeItems
 };
 
 //Добавление в начало(сверху)
-void AddAfter(SomeItems *&head, int id, int AmountOfItems){
+void AddFirst(SomeItems *&head, int id, int AmountOfItems){
     SomeItems *newItem = new SomeItems;
     newItem -> ID = id;
     newItem -> AmountOfItems = AmountOfItems;
@@ -20,7 +20,7 @@ void AddAfter(SomeItems *&head, int id, int AmountOfItems){
     head = newItem;
 }
 //Добавление в конец(снизу)
-void AddBefore(SomeItems *&head, int id, int AmountOfItems){
+void AddLast(SomeItems *&head, int id, int AmountOfItems){
     SomeItems *newItem = new SomeItems;
     newItem -> ID = id; 
     newItem -> AmountOfItems = AmountOfItems;
