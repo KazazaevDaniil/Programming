@@ -18,10 +18,10 @@ struct MoviePoster {
 
 class DBMS {
 public:
-    DBMS(std::string connectionString) : connectionString{connectionString} {}
+    DBMS(std::string FileName) : FileName{FileName} {}
 
     void SaveData() {
-        std::ofstream out(connectionString);
+        std::ofstream out(FileName);
         if (out.is_open()) {
             for (const MoviePoster &MoviePoster : temps) {
                 out << '"' << MoviePoster.Name << '"' << " " <<  MoviePoster.Day << " " << MoviePoster.Month << " " << MoviePoster.Year << std::endl;
@@ -31,7 +31,7 @@ public:
     }
 
     void LoadData() {
-        std::ifstream in(connectionString);
+        std::ifstream in(FileName);
         if (in.is_open()) {
             std::string name;
             int day, monthNum, year;
@@ -84,7 +84,7 @@ public:
 
 private:
     std::vector<MoviePoster> temps;
-    std::string connectionString;
+    std::string FileName;
 };
 
 std::string ValidName(const std::string &Request) {
