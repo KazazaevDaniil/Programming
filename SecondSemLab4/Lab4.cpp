@@ -8,7 +8,7 @@ int main() {
 
     while (true) {
         Menu();
-        choice = ValidNumber("Enter your choice: ");
+        choice = ValidNumber("What do you want to do: ");
 
         if (choice == 8) {
             break;
